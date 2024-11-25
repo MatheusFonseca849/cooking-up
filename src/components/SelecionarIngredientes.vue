@@ -14,7 +14,8 @@ export default {
     console.log(this.categorias)
   },
 
-  components: { CardCategoria }
+  components: { CardCategoria },
+  emits: ['adicionarIngrediente']
 };
 </script>
 
@@ -26,7 +27,7 @@ export default {
     </p>
     <ul class="categorias">
         <li v-for="categoria in categorias" key="categoria.nome">
-            <CardCategoria :categoria="categoria" key="categoria.nome"/>
+            <CardCategoria :categoria="categoria" key="categoria.nome" @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"/>
         </li>
     </ul>
   </section>

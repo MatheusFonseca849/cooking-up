@@ -1,36 +1,27 @@
 <script lang="ts">
-import SelecionarIngredientes from "./SelecionarIngredientes.vue";
-import Tag from "./Tag.vue";
+import SelecionarIngredientes from './SelecionarIngredientes.vue';
+import SuaLista from './SuaLista.vue';
 
 export default {
   data() {
     return {
-      ingredientes: ["Alho", "Manteiga", "Orégano"],
+      ingredientes: [] as string[]
     };
   },
-  components: { SelecionarIngredientes, Tag },
-};
+  components: { SelecionarIngredientes, SuaLista },
+  methods: {
+    adicionarIngrediente(ingrediente: string) {
+      this.ingredientes.push(ingrediente);
+    }
+  }
+}
 </script>
 
 <template>
   <main class="conteudo-principal">
-    <section>
-      <span class="subtitulo-lg sua-lista-texto">Sua lista:</span>
-      <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
-        <li v-for="ingrediente in ingredientes" :key="ingrediente">
-          <Tag :texto="ingrediente" ativa/>
-        </li>
-      </ul>
-      <p v-else class="paragrafo lista-vazia">
-        <img
-          src="../assets/imagens/sem-receitas.png"
-          alt="Ícone de pesquisa."
-        />
-        Sua lista está vazia. Selecione ingredientes para começar.
-      </p>
-    </section>
+    <SuaLista :ingredientes="ingredientes" />
 
-    <SelecionarIngredientes />
+    <SelecionarIngredientes @adicionar-ingrediente="adicionarIngrediente"/>
   </main>
 </template>
 
